@@ -1,0 +1,52 @@
+/* Reset */
+body, h1, h2, h3, ul, li, a, p {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/*--------------------------------------------------------------
+Styles
+--------------------------------------------------------------*/
+a {
+  color: hsl(214, 58%, 55%);
+}
+
+a:hover {
+  border-bottom: 2px solid hsl(214, 58%, 55%);
+}
+
+nav ul > li {
+  display: inline-block;
+  padding-right: 12px;
+}
+
+/*--------------------------------------------------------------
+Form Styles
+--------------------------------------------------------------*/
+form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  min-width: 360px;
+  padding: 24px 36px;
+  background-color: hsl(211, 25%, 90%);
+}
+
+label {
+  position: relative;
+  top: 4px;
+}
+
+button {
+    padding: 8px;
+}
