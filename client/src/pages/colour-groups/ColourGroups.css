@@ -1,0 +1,19 @@
+.colour-groups-page .colour-group {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    "name"
+    "swatches";
+    padding-top: 24px;
+}
+
+.colour-groups-page .colour-group-colour-swatches {
+    grid-area: swatches;
+    display: flex;
+    flex-direction: row;
+}
+
+.colour-groups-page .colour-group-colour-swatch{
+    width: 50px;
+    height: 50px;
+}

@@ -1,0 +1,13 @@
+.colour-palette-page .colour-groups {
+    display: flex;
+    flex-direction: column;
+}
+.colour-palette-page .colour-group {
+    display: flex;
+    flex-direction: row;
+    padding: 24px;
+}
+.colour-palette-page .colour-group-colour-swatch{
+    width: 50px;
+    height: 50px;
+}

@@ -6,18 +6,13 @@ export function Navigation() {
       <ul>
         <li>
           <NavLink exact to="/">
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink exact to="/colour-palettes">
             Colour Palettes
           </NavLink>
         </li>
 
         <li>
-          <NavLink exact to="/colours">
-            Colours
+          <NavLink exact to="/colour-groups">
+            Colour Groups
           </NavLink>
         </li>
 
