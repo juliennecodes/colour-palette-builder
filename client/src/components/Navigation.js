@@ -17,8 +17,8 @@ export function Navigation() {
         </li>
 
         <li>
-          <NavLink exact to="/add-new-colours">
-            Add New Colours
+          <NavLink exact to="/add-new-colour-group">
+            Add New Colour Group
           </NavLink>
         </li>
       </ul>

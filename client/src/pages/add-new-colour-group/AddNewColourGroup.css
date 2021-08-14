@@ -1,0 +1,14 @@
+.colour-swatch{
+    width: 50px;
+    height: 50px;
+}
+
+.new-colour-group {
+    display: flex;
+    flex-direction: row;
+}
+
+.new-colour-form {
+    display: flex;
+    flex-direction: row;
+}
