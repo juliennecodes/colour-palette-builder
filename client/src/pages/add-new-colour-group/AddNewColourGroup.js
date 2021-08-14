@@ -4,7 +4,6 @@ import "./AddNewColourGroup.css";
 
 export function AddNewColourGroup() {
   const [newColourGroup, setNewColourGroup] = useState([]);
-  const [newColour, setNewColour] = useState({});
   let history = useHistory();
 
   const submitForm = (newColourGroup) => {
@@ -19,6 +18,36 @@ export function AddNewColourGroup() {
     <div className="new-colour-group-form">
       <h1>New Colour Group Form</h1>
 
+      <NewColourForm
+        newColourGroup={newColourGroup}
+        setNewColourGroup={setNewColourGroup}
+      />
+
+      <NewColourGroup newColourGroup={newColourGroup} />
+
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          submitForm(newColourGroup);
+        }}
+      >
+        <button>Submit new colour group</button>
+      </form>
+    </div>
+  );
+}
+
+function clearInputValues() {
+  const inputs = Array.from(document.querySelectorAll(".new-colour-input"));
+  for (const input of inputs) {
+    input.value = null;
+  }
+}
+
+function NewColourForm({newColourGroup, setNewColourGroup}) {
+  const [newColour, setNewColour] = useState({});
+  return (
+    <>
       <form
         className="new-colour-form"
         onSubmit={(e) => {
@@ -62,10 +91,17 @@ export function AddNewColourGroup() {
           ></input>
         </div>
 
-        <button>Add new colour</button>
+        <button>Add new colour to group</button>
       </form>
+    </>
+  );
+}
 
-      <div className="new-colour-group">
+function NewColourGroup({newColourGroup}) {
+  return (
+    <div className="new-colour-group">
+      <h2>Colour Group</h2>
+      <div className="colour-swatches">
         {newColourGroup.map((colour, index) => {
           return (
             <div
@@ -78,22 +114,6 @@ export function AddNewColourGroup() {
           );
         })}
       </div>
-
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          submitForm(newColourGroup);
-        }}
-      >
-        <button>Submit new colour group</button>
-      </form>
     </div>
   );
-}
-
-function clearInputValues() {
-  const inputs = Array.from(document.querySelectorAll(".new-colour-input"));
-  for (const input of inputs) {
-    input.value = null;
-  }
 }

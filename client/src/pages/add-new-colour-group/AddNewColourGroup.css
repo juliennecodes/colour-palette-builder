@@ -4,6 +4,11 @@
 }
 
 .new-colour-group {
+    border: 2px solid black;
+    min-height: 100px;
+}
+
+.colour-swatches {
     display: flex;
     flex-direction: row;
 }
