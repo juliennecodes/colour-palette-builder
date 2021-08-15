@@ -22,29 +22,40 @@ export function ColourPalette() {
         <>
           <h1>{`${colourPalette.name} Palette Page`}</h1>
           <div className="colour-groups">
-          {colourPalette.primary.map((colourGroup, index) => {
-            return (
-              <div className="colour-group" key={index}>
-                {colourGroup.map((colour, index) => {
-                  return (
-                    <div
-                      className="colour-group-colour-swatch"
-                      key={index}
-                      style={{
-                        backgroundColor: `hsl(${colour.hue}, ${colour.saturation}%, ${colour.lightness}%)`,
-                      }}
-                    ></div>
-                  );
-                })}
-              </div>
-            );
-          })}
+            {colourPalette.primary.map((colourGroup, index) => {
+              return (
+                <div className="colour-group" key={index}>
+                  {colourGroup.map((colour, index) => {
+                    return (
+                      <div
+                        onClick={() =>
+                          copyColourValueToClipboard(
+                            colour.hue,
+                            colour.saturation,
+                            colour.lightness
+                          )
+                        }
+                        className="colour-group-colour-swatch"
+                        key={index}
+                        style={{
+                          backgroundColor: `hsl(${colour.hue}, ${colour.saturation}%, ${colour.lightness}%)`,
+                        }}
+                      ></div>
+                    );
+                  })}
+                </div>
+              );
+            })}
           </div>
-
         </>
       ) : (
         <Loading />
       )}
     </div>
   );
+}
+
+function copyColourValueToClipboard(hue, saturation, lightness) {
+  const hslValue = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+  navigator.clipboard.writeText(hslValue);
 }
