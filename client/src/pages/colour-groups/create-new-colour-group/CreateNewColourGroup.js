@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import "./AddNewColourGroup.css";
+import "./CreateNewColourGroup.css";
 
-export function AddNewColourGroup() {
+export function CreateNewColourGroup() {
   const [newColourGroup, setNewColourGroup] = useState([]);
   let history = useHistory();
 

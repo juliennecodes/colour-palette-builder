@@ -22,7 +22,7 @@ export function Navigation() {
         </li>
         <li>
           <NavLink exact to="/create-new-colour-group">
-            Add New Colour Group
+            Create New Colour Group
           </NavLink>
         </li>
         <li>

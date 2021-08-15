@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Loading } from "../../components/Loading";
+import { Loading } from "../../../components/Loading";
 
 export function DeleteColourPalette() {
   const [colourPalettes, setColourPalettes] = useState(null);
