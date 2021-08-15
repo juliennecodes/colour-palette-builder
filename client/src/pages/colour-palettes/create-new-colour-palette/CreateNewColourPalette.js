@@ -1,12 +1,21 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Loading } from "../../../components/Loading";
 import "./CreateNewColourPalette.css";
 
 export function CreateNewColourPalette() {
-  const [newColourPalette, setNewColourPalette] = useState({colourGroups: []});
-  const [colourGroups, setColourGroups] = useState(null);
+  const [newColourPalette, setNewColourPalette] = useState({
+    name: null,
+    colourGroups: [],
+  });
   let history = useHistory();
+
+  const [colourGroups, setColourGroups] = useState(null);
+
+  useEffect(() => {
+    fetch(`/colour_groups`)
+      .then((res) => res.json())
+      .then((serverResponse) => setColourGroups(serverResponse.colourGroups));
+  }, []);
 
   const submitForm = (newColourPalette) => {
     fetch(`/colour_palettes`, {
@@ -16,15 +25,8 @@ export function CreateNewColourPalette() {
     }).then((res) => history.push(`/`));
   };
 
-  useEffect(() => {
-    fetch(`/colour_groups`)
-      .then((res) => res.json())
-      .then((serverResponse) => setColourGroups(serverResponse.colourGroups));
-  }, []);
-
-  return colourGroups ? (
-    <div className="new-colour-palette-page">
-      <h1>New Colour Palette Form</h1>
+  const NewColourPaletteForm = () => {
+    return (
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -40,11 +42,14 @@ export function CreateNewColourPalette() {
         ></input>
         <button>Create new colour palette</button>
       </form>
+    );
+  };
 
+  const SelectedColourGroups = () => {
+    return (
       <div className="selected-colour-groups">
         <h2>Selected Colour Groups </h2>
-        {
-        newColourPalette.colourGroups.map((colourGroup, index) => {
+        {newColourPalette.colourGroups.map((colourGroup, index) => {
           return (
             <div className="colour-group" key={index}>
               <div className="colour-group-colour-swatches">
@@ -62,9 +67,13 @@ export function CreateNewColourPalette() {
               </div>
             </div>
           );
-        })
-      }</div>
+        })}
+      </div>
+    );
+  };
 
+  const ColourGroupChoices = () => {
+    return (
       <div className="colour-group-choices">
         <h2>Colour Group Choices </h2>
         {colourGroups.map((colourGroup, index) => {
@@ -78,12 +87,20 @@ export function CreateNewColourPalette() {
           );
         })}
       </div>
+    );
+  };
+  
+  return (
+    <div className="new-colour-palette-page">
+      <h1>New Colour Palette Form</h1>
+      <NewColourPaletteForm />
+      <SelectedColourGroups />
+      {colourGroups && <ColourGroupChoices />}
     </div>
-  ) : (
-    <Loading />
   );
 }
-
+// ----------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------
 function ColourGroupChoice({
   colourGroup,
   index,

@@ -5,14 +5,20 @@ body, h1, h2, h3, ul, li, a, p {
     box-sizing: border-box;
 }
 
-body, button {
+body, button, option {
   font-family: 'Nunito', sans-serif;
 }
 
 /*--------------------------------------------------------------
-Styles
+Font Sizing
 --------------------------------------------------------------*/
+header {
+  font-size: 12px;
+}
 
+footer {
+  font-size: 10px;
+}
 
 /*--------------------------------------------------------------
 Form Styles

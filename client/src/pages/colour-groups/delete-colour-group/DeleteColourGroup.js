@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Loading } from "../../../components/Loading";
 
 export function DeletecolourGroup() {
   const [colourGroups, setColourGroups] = useState(null);
@@ -24,34 +23,36 @@ export function DeletecolourGroup() {
     }).then((res) => history.push(`/`));
   };
 
-  return (
-    <div className="delete-colour-group">
-      <h1>Delete Colour Group</h1>
+  const DeleteColourGroupForm = ()=> {
+    return(
+      <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        deletecolourGroup(toBeDeletedColourGroupId);
+      }}
+    >
+      <select
+        onChange={(e) => setToBeDeletedColourGroupId(e.target.value)}
+      >
+        <option>--- Choose group to delete ---</option>
 
-      {colourGroups ? (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            deletecolourGroup(toBeDeletedColourGroupId);
-          }}
-        >
-          <select
-            onChange={(e) => setToBeDeletedColourGroupId(e.target.value)}
-          >
-            <option>--- Choose group to delete ---</option>
-            {colourGroups.map((colourGroup, index) => {
-              return (
-                <option key={index} value={colourGroup.id}>
-                  {colourGroup.name}
-                </option>
-              );
-            })}
-          </select>
-          <button>Delete colour group</button>
-        </form>
-      ) : (
-        <Loading />
-      )}
+        {colourGroups.map((colourGroup, index) => {
+          return (
+            <option key={index} value={colourGroup.id}>
+              {colourGroup.name}
+            </option>
+          );
+        })}
+        
+      </select>
+      <button>Delete colour group</button>
+    </form>
+    );
+  }
+  return (
+    <div className="delete-colour-group-page">
+      <h1>Delete Colour Group</h1>
+      {colourGroups && <DeleteColourGroupForm />}
     </div>
   );
 }

@@ -3,7 +3,10 @@ import { useHistory } from "react-router-dom";
 import "./CreateNewColourGroup.css";
 
 export function CreateNewColourGroup() {
-  const [newColourGroup, setNewColourGroup] = useState({name: null, colours: []});
+  const [newColourGroup, setNewColourGroup] = useState({
+    name: null,
+    colours: [],
+  });
   let history = useHistory();
 
   const submitForm = (newColourGroup) => {
@@ -14,17 +17,8 @@ export function CreateNewColourGroup() {
     }).then((res) => history.push(`/`));
   };
 
-  return (
-    <div className="new-colour-group-form">
-      <h1>New Colour Group Form</h1>
-
-      <NewColourForm
-        newColourGroup={newColourGroup}
-        setNewColourGroup={setNewColourGroup}
-      />
-
-      <NewColourGroup newColourGroup={newColourGroup} />
-
+  const NewColourGroupForm = () => {
+    return (
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -32,31 +26,55 @@ export function CreateNewColourGroup() {
         }}
       >
         <label>Name</label>
-        <input type="text" onChange={(e)=> setNewColourGroup({...newColourGroup, name: e.target.value})}></input>
+        <input
+          type="text"
+          onChange={(e) =>
+            setNewColourGroup({ ...newColourGroup, name: e.target.value })
+          }
+        ></input>
+
+        <NewColourGroup />
+
         <button>Submit new colour group</button>
       </form>
-    </div>
-  );
-}
+    );
+  };
 
-function clearInputValues() {
-  const inputs = Array.from(document.querySelectorAll(".new-colour-input"));
-  for (const input of inputs) {
-    input.value = null;
-  }
-}
+  const NewColourGroup = () => {
+    return (
+      <div className="new-colour-group">
+        <h2>Colour Group</h2>
+        <div className="colour-group-colour-swatches">
+          {newColourGroup.colours.map((colour, index) => {
+            return (
+              <div
+                className="colour-group-colour-swatch"
+                key={index}
+                style={{
+                  backgroundColor: `hsl(${colour.hue}, ${colour.saturation}%, ${colour.lightness}%)`,
+                }}
+              ></div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
 
-function NewColourForm({newColourGroup, setNewColourGroup}) {
-  const [newColour, setNewColour] = useState({});
-  return (
-    <>
+  const NewColourForm = () => {
+    const [newColour, setNewColour] = useState({});
+
+    return (
       <form
         className="new-colour-form"
         onSubmit={(e) => {
           e.preventDefault();
           const updatedNewColourGroupColours = [...newColourGroup.colours];
           updatedNewColourGroupColours.push(newColour);
-          setNewColourGroup({...newColourGroup, colours: updatedNewColourGroupColours});
+          setNewColourGroup({
+            ...newColourGroup,
+            colours: updatedNewColourGroupColours,
+          });
           clearInputValues();
         }}
       >
@@ -93,29 +111,39 @@ function NewColourForm({newColourGroup, setNewColourGroup}) {
           ></input>
         </div>
 
+        <div className="new-colour-preview-div">
+          <p>Preview</p>
+          <div
+            className="new-colour-preview"
+            style={{
+              backgroundColor: `hsl(${newColour.hue}, ${newColour.saturation}%, ${newColour.lightness}%)`,
+            }}
+          ></div>
+        </div>
+
         <button>Add new colour to group</button>
       </form>
-    </>
-  );
-}
+    );
+  };
 
-function NewColourGroup({newColourGroup}) {
   return (
-    <div className="new-colour-group">
-      <h2>Colour Group</h2>
-      <div className="colour-group-colour-swatches">
-        {newColourGroup.colours.map((colour, index) => {
-          return (
-            <div
-              className="colour-group-colour-swatch"
-              key={index}
-              style={{
-                backgroundColor: `hsl(${colour.hue}, ${colour.saturation}%, ${colour.lightness}%)`,
-              }}
-            ></div>
-          );
-        })}
+    <div className="new-colour-group-form-page">
+      <div className="new-colour-group-form-div">
+        <h1>New Colour Group Form</h1>
+        <NewColourGroupForm />
+      </div>
+
+      <div className="new-colour-form-div">
+        <h2>New Colour Form</h2>
+        <NewColourForm />
       </div>
     </div>
   );
+}
+
+function clearInputValues() {
+  const inputs = Array.from(document.querySelectorAll(".new-colour-input"));
+  for (const input of inputs) {
+    input.value = null;
+  }
 }

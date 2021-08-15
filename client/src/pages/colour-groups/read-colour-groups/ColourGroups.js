@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Loading } from "../../../components/Loading";
 import "./ColourGroups.css";
 
 export function ColourGroups() {
@@ -11,11 +10,9 @@ export function ColourGroups() {
       .then((serverResponse) => setColourGroups(serverResponse.colourGroups));
   }, []);
 
-  return (
-    <div className="colour-groups-page">
-      <h1>Colour Groups</h1>
-      {colourGroups ? (
-        <div className="colour-groups">
+  const Colours = ()=>{
+    return(
+      <div className="colour-groups">
           {colourGroups.map((colourGroup, index) => {
             return (
               <div className="colour-group" key={index}>
@@ -44,9 +41,12 @@ export function ColourGroups() {
             );
           })}
         </div>
-      ) : (
-        <Loading />
-      )}
+    )
+  }
+  return (
+    <div className="colour-groups-page">
+      <h1>Colour Groups</h1>
+      {colourGroups && <Colours />}
     </div>
   );
 }
