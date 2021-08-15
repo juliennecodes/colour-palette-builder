@@ -24,6 +24,13 @@ export function ColourGroups() {
                   {colourGroup.colours.map((colour, index) => {
                     return (
                       <div
+                        onClick={() =>
+                          copyColourValueToClipboard(
+                            colour.hue,
+                            colour.saturation,
+                            colour.lightness
+                          )
+                        }
                         className="colour-group-colour-swatch"
                         key={index}
                         style={{
@@ -40,7 +47,13 @@ export function ColourGroups() {
       ) : (
         <Loading />
       )}
-
     </div>
   );
 }
+
+function copyColourValueToClipboard(hue, saturation, lightness) {
+  const hslValue = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+  navigator.clipboard.writeText(hslValue);
+}
+
+
