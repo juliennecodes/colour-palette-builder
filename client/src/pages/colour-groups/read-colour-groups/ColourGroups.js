@@ -15,7 +15,7 @@ export function ColourGroups() {
     <div className="colour-groups-page">
       <h1>Colour Groups</h1>
       {colourGroups ? (
-        <ul>
+        <div className="colour-groups">
           {colourGroups.map((colourGroup, index) => {
             return (
               <div className="colour-group" key={index}>
@@ -43,7 +43,7 @@ export function ColourGroups() {
               </div>
             );
           })}
-        </ul>
+        </div>
       ) : (
         <Loading />
       )}

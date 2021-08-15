@@ -26,7 +26,7 @@ export function DeletecolourGroup() {
 
   return (
     <div className="delete-colour-group">
-      <h1>All The Things</h1>
+      <h1>Delete Colour Group</h1>
 
       {colourGroups ? (
         <form
