@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import "./CreateNewColourGroup.css";
 
 export function CreateNewColourGroup() {
-  const [newColourGroup, setNewColourGroup] = useState([]);
+  const [newColourGroup, setNewColourGroup] = useState({name: null, colours: []});
   let history = useHistory();
 
   const submitForm = (newColourGroup) => {
@@ -31,6 +31,8 @@ export function CreateNewColourGroup() {
           submitForm(newColourGroup);
         }}
       >
+        <label>Name</label>
+        <input type="text" onChange={(e)=> setNewColourGroup({...newColourGroup, name: e.target.value})}></input>
         <button>Submit new colour group</button>
       </form>
     </div>
@@ -52,9 +54,9 @@ function NewColourForm({newColourGroup, setNewColourGroup}) {
         className="new-colour-form"
         onSubmit={(e) => {
           e.preventDefault();
-          const updatedNewColourGroup = [...newColourGroup];
-          updatedNewColourGroup.push(newColour);
-          setNewColourGroup(updatedNewColourGroup);
+          const updatedNewColourGroupColours = [...newColourGroup.colours];
+          updatedNewColourGroupColours.push(newColour);
+          setNewColourGroup({...newColourGroup, colours: updatedNewColourGroupColours});
           clearInputValues();
         }}
       >
@@ -101,11 +103,11 @@ function NewColourGroup({newColourGroup}) {
   return (
     <div className="new-colour-group">
       <h2>Colour Group</h2>
-      <div className="colour-swatches">
-        {newColourGroup.map((colour, index) => {
+      <div className="colour-group-colour-swatches">
+        {newColourGroup.colours.map((colour, index) => {
           return (
             <div
-              className="colour-swatch"
+              className="colour-group-colour-swatch"
               key={index}
               style={{
                 backgroundColor: `hsl(${colour.hue}, ${colour.saturation}%, ${colour.lightness}%)`,

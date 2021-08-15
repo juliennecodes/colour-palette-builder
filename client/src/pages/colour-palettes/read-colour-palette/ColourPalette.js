@@ -24,7 +24,7 @@ export function ColourPalette() {
           <div className="colour-groups">
             {colourPalette.primary.map((colourGroup, index) => {
               return (
-                <div className="colour-group" key={index}>
+                <div className="colour-group-colour-swatches" key={index}>
                   {colourGroup.map((colour, index) => {
                     return (
                       <div
