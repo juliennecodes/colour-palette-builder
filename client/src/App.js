@@ -15,20 +15,26 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Navigation />
-        <Switch>
+        <header>
+          <Navigation />
+        </header>
 
-          <Route exact path="/create-new-colour-palette"component={CreateNewColourPalette}/>
-          <Route exact path="/" component={ColourPalettes} />
-          <Route exact path="/colour-palettes/:id" component={ColourPalette} />
-          <Route exact path="/delete-colour-palette" component={DeleteColourPalette} />
+        <main className="content">
+          <Switch>
+            <Route exact path="/create-new-colour-palette"component={CreateNewColourPalette}/>
+            <Route exact path="/" component={ColourPalettes} />
+            <Route exact path="/colour-palettes/:id" component={ColourPalette} />
+            <Route exact path="/delete-colour-palette" component={DeleteColourPalette} />
 
-          <Route exact path="/create-new-colour-group" component={CreateNewColourGroup}/>
-          <Route exact path="/colour-groups" component={ColourGroups} />
-          <Route exact path="/delete-colour-group" component={DeletecolourGroup} />
+            <Route exact path="/create-new-colour-group" component={CreateNewColourGroup}/>
+            <Route exact path="/colour-groups" component={ColourGroups} />
+            <Route exact path="/delete-colour-group" component={DeletecolourGroup} />
 
-        </Switch>
+          </Switch>
+        </main>
+        
       </Router>
+        <footer>Copyright &copy; 2021 Julienne San Luis</footer>
     </div>
   );
 }
