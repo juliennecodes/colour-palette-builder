@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Loading } from "../../components/Loading";
-import { AddToPaletteForm } from "../add-to-palette-form/AddToPaletteForm";
 import "./ColourGroups.css";
 
 export function ColourGroups() {
@@ -42,7 +41,6 @@ export function ColourGroups() {
         <Loading />
       )}
 
-      <AddToPaletteForm />
     </div>
   );
 }

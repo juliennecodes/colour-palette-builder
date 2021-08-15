@@ -25,10 +25,10 @@ a:hover {
   border-bottom: 2px solid hsl(214, 58%, 55%);
 }
 
-nav ul > li {
+/* nav ul > li {
   display: inline-block;
   padding-right: 12px;
-}
+} */
 
 /*--------------------------------------------------------------
 Form Styles

@@ -4,6 +4,7 @@ class ColourGroupsController < ApplicationController
             colourGroups: [
               {
                 name: "Coral",
+                id: 1,
                 colours: [
                   {
                     hue: 0,
@@ -30,6 +31,7 @@ class ColourGroupsController < ApplicationController
           
               {
                 name: "Red",
+                id: 2,
                 colours: [
                   {
                     hue: 352,
@@ -56,6 +58,7 @@ class ColourGroupsController < ApplicationController
           
               {
                 name: "Aqua",
+                id: 3,
                 colours: [
                   {
                     hue: 193,
@@ -82,6 +85,7 @@ class ColourGroupsController < ApplicationController
           
               {
                 name: "Mauve",
+                id: 4,
                 colours: [
                   {
                     hue: 335,
@@ -108,6 +112,7 @@ class ColourGroupsController < ApplicationController
           
               {
                 name: "Yellow",
+                id: 5,
                 colours: [
                   {
                     hue: 54,
@@ -138,4 +143,8 @@ class ColourGroupsController < ApplicationController
     def create
         head :no_content
     end
+
+    def destroy
+      head :no_content
+  end
 end
