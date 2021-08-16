@@ -35,6 +35,7 @@ export function CreateNewColourPalette() {
       <h1 className="new-colour-palette-page-heading">
         New Colour Palette Form
       </h1>
+
       <div className="new-colour-form-name-input-div">
         <label
           className="new-colour-form-name-input-label"
@@ -84,8 +85,8 @@ export function CreateNewColourPalette() {
           {colourGroups.map((colourGroup, index) => {
             return (
               <ColourGroupChoice
+              key={index}
                 colourGroup={colourGroup}
-                index={index}
                 newColourPalette={newColourPalette}
                 setNewColourPalette={setNewColourPalette}
               />
@@ -102,7 +103,6 @@ export function CreateNewColourPalette() {
 
 function ColourGroupChoice({
   colourGroup,
-  index,
   newColourPalette,
   setNewColourPalette,
 }) {
@@ -178,7 +178,7 @@ function ColourGroupChoice({
   };
 
   return (
-    <div className="colour-group" key={index}>
+    <div className="colour-group">
       <div
         className="deselect-overlay"
         style={
