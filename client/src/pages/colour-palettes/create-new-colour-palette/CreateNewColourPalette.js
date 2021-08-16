@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { AddSVG } from "../../../components/AddSVG";
-import { Loading } from "../../../components/Loading";
 import { RemoveSVG } from "../../../components/RemoveSVG";
 import "./CreateNewColourPalette.css";
 
@@ -23,8 +22,8 @@ export function CreateNewColourPalette() {
       body: JSON.stringify({ newColourPalette }),
     }).then((res) => history.push(`/`));
   };
-
-  return colourGroups ? (
+  
+  return (
     <form
       className="new-colour-palette-page"
       onSubmit={(e) => {
@@ -32,69 +31,82 @@ export function CreateNewColourPalette() {
         submitForm(newColourPalette);
       }}
     >
-      <h1 className="new-colour-palette-page-heading">New Colour Palette Form</h1>
-
-      <div className="new-colour-form-name-input-div">
-        <label
-          className="new-colour-form-name-input-label"
-          htmlFor="input-field"
-        >
-          Name:
-        </label>
-        <input
-          onChange={(e) =>
-            setNewColourPalette({ ...newColourPalette, name: e.target.value })
-          }
-          className="new-colour-form-name-input"
-          name="input-field"
-          placeholder="Name..."
-        ></input>
-        <span className="new-colour-form-name-input-span"></span>
-      </div>
-
-      <div className="selected-colour-groups">
-        <h2 className="selected-colour-groups-heading">
-          Selected Colour Groups:
-        </h2>
-        {newColourPalette.colourGroups.map((colourGroup, index) => {
-          return (
-            <div className="colour-group" key={index}>
-              <div className="colour-group-colour-swatches">
-                {colourGroup.colours.map((colour, index) => {
-                  return (
-                    <div
-                      className="colour-group-colour-swatch"
-                      key={index}
-                      style={{backgroundColor: `hsl(${colour.hue}, ${colour.saturation}%, ${colour.lightness}%)`,}}
-                    ></div>
-                  );
-                })}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="colour-group-choices">
-        <h2 className="colour-group-choices-heading">Colour Group Choices:</h2>
-        <div className="colour-groups">
-          {colourGroups.map((colourGroup, index) => {
-            return (
-              <ColourGroupChoice
-                key={index}
-                colourGroup={colourGroup}
-                newColourPalette={newColourPalette}
-                setNewColourPalette={setNewColourPalette}
-              />
-            );
-          })}
-        </div>
-      </div>
-      <button className="submit-form-button">Create new colour palette</button>
+        <h1 className="new-colour-palette-page-heading">New Colour Palette Form</h1>
+        <NameInputField newColourPalette={newColourPalette} setNewColourPalette={setNewColourPalette}/>
+        <SelectedColourGroups newColourPalette={newColourPalette} />
+        {colourGroups && <ColourGroupChoices colourGroups={colourGroups} newColourPalette={newColourPalette} setNewColourPalette={setNewColourPalette}/>}
+        <button className="submit-form-button">Create new colour palette</button>
     </form>
-  ) : (
-    <Loading />
   );
+}
+
+function NameInputField({newColourPalette, setNewColourPalette}){
+  return(
+    <div className="new-colour-form-name-input-div">
+    <label
+      className="new-colour-form-name-input-label"
+      htmlFor="input-field"
+    >
+      Name:
+    </label>
+    <input
+      onChange={(e) =>
+        setNewColourPalette({ ...newColourPalette, name: e.target.value })
+      }
+      className="new-colour-form-name-input"
+      name="input-field"
+      placeholder="Name..."
+    ></input>
+    <span className="new-colour-form-name-input-span"></span>
+  </div>
+  )
+}
+
+function SelectedColourGroups({newColourPalette}){
+  return(
+    <div className="selected-colour-groups">
+    <h2 className="selected-colour-groups-heading">
+      Selected Colour Groups:
+    </h2>
+    {newColourPalette.colourGroups.map((colourGroup, index) => {
+      return (
+        <div className="colour-group" key={index}>
+          <div className="colour-group-colour-swatches">
+            {colourGroup.colours.map((colour, index) => {
+              return (
+                <div
+                  className="colour-group-colour-swatch"
+                  key={index}
+                  style={{backgroundColor: `hsl(${colour.hue}, ${colour.saturation}%, ${colour.lightness}%)`,}}
+                ></div>
+              );
+            })}
+          </div>
+        </div>
+      );
+    })}
+  </div>
+  );
+}
+
+function ColourGroupChoices ({colourGroups, newColourPalette, setNewColourPalette}) {
+  return(
+    <div className="colour-group-choices">
+    <h2 className="colour-group-choices-heading">Colour Group Choices:</h2>
+    <div className="colour-groups">
+      {colourGroups.map((colourGroup, index) => {
+        return (
+          <ColourGroupChoice
+            key={index}
+            colourGroup={colourGroup}
+            newColourPalette={newColourPalette}
+            setNewColourPalette={setNewColourPalette}
+          />
+        );
+      })}
+    </div>
+  </div>
+  )
 }
 
 function ColourGroupChoice({colourGroup, newColourPalette, setNewColourPalette}) {
@@ -159,6 +171,7 @@ function ColourGroupChoice({colourGroup, newColourPalette, setNewColourPalette})
           );
         })}
       </div>
+      
       {selected ? <RemoveButton /> : <AddButton />}
     </div>
   );
