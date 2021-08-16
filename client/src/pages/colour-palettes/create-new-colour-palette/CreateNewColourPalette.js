@@ -25,29 +25,38 @@ export function CreateNewColourPalette() {
   }, []);
 
   return colourGroups ? (
-    <div className="new-colour-palette-page">
+    <form
+      className="new-colour-palette-page"
+      onSubmit={(e) => {
+        e.preventDefault();
+        submitForm(newColourPalette);
+      }}
+    >
       <h1 className="new-colour-palette-page-heading">
         New Colour Palette Form
       </h1>
-      <form
-        className="new-colour-form-name-input"
-        onSubmit={(e) => {
-          e.preventDefault();
-          submitForm(newColourPalette);
-        }}
-      >
-        <label htmlFor="input-field">Name</label>
+      <div className="new-colour-form-name-input-div">
+        <label
+          className="new-colour-form-name-input-label"
+          htmlFor="input-field"
+        >
+          Name:
+        </label>
         <input
           onChange={(e) =>
             setNewColourPalette({ ...newColourPalette, name: e.target.value })
           }
+          className="new-colour-form-name-input"
           name="input-field"
+          placeholder="Name..."
         ></input>
-        <button>Create new colour palette</button>
-      </form>
+        <span className="new-colour-form-name-input-span"></span>
+      </div>
 
       <div className="selected-colour-groups">
-        <h2>Selected Colour Groups </h2>
+        <h2 className="selected-colour-groups-heading">
+          Selected Colour Groups:
+        </h2>
         {newColourPalette.colourGroups.map((colourGroup, index) => {
           return (
             <div className="colour-group" key={index}>
@@ -70,19 +79,22 @@ export function CreateNewColourPalette() {
       </div>
 
       <div className="colour-group-choices">
-        <h2>Colour Group Choices </h2>
-        {colourGroups.map((colourGroup, index) => {
-          return (
-            <ColourGroupChoice
-              colourGroup={colourGroup}
-              index={index}
-              newColourPalette={newColourPalette}
-              setNewColourPalette={setNewColourPalette}
-            />
-          );
-        })}
+        <h2 className="colour-group-choices-heading">Colour Group Choices:</h2>
+        <div className="colour-groups">
+          {colourGroups.map((colourGroup, index) => {
+            return (
+              <ColourGroupChoice
+                colourGroup={colourGroup}
+                index={index}
+                newColourPalette={newColourPalette}
+                setNewColourPalette={setNewColourPalette}
+              />
+            );
+          })}
+        </div>
       </div>
-    </div>
+      <button className="submit-form-button">Create new colour palette</button>
+    </form>
   ) : (
     <Loading />
   );
@@ -131,7 +143,10 @@ function ColourGroupChoice({
           width="24"
         >
           <path d="M0 0h24v24H0V0z" fill="none" />
-          <path d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z" />
+          <path
+            fill="hsl(208, 90%, 64%)"
+            d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z"
+          />
         </svg>
       </button>
     );
@@ -153,7 +168,10 @@ function ColourGroupChoice({
           width="24"
         >
           <path d="M0 0h24v24H0V0z" fill="none" />
-          <path d="M18 13H6c-.55 0-1-.45-1-1s.45-1 1-1h12c.55 0 1 .45 1 1s-.45 1-1 1z" />
+          <path
+            fill="hsl(208, 90%, 64%)"
+            d="M18 13H6c-.55 0-1-.45-1-1s.45-1 1-1h12c.55 0 1 .45 1 1s-.45 1-1 1z"
+          />
         </svg>
       </button>
     );
@@ -165,7 +183,7 @@ function ColourGroupChoice({
         className="deselect-overlay"
         style={
           selected
-            ? { backgroundColor: "hsla(0, 0%, 0%, .3)" }
+            ? { backgroundColor: "hsla(208, 90%, 73%, .5)" }
             : { backgroundColor: "hsla(0, 0%, 0%, 0)" }
         }
       ></div>

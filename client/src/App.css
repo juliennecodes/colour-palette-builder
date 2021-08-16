@@ -2,23 +2,27 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas:
-  "header"
-  "main"
-  "footer" ;
+    "header"
+    "main"
+    "footer";
 }
 
 header {
   grid-area: header;
-  background-color: hsl(0, 100%, 95%);
+  /* background-color: hsl(0, 100%, 95%); */
+  background-color: var(--colour-al3);
 }
 
 main {
   grid-area: main;
-  background-color: hsl(0, 100%, 98%);
+  background-color: var(--colour-al3);
   padding: 24px 36px;
 }
 
 footer {
   grid-area: footer;
-  background-color: hsl(0, 100%, 95%);
+  /* background-color: hsl(0, 100%, 95%); */
+  background-color: var(--colour-al3);
+  padding: 12px 24px;
+  color: var(--colour-al5);
 }

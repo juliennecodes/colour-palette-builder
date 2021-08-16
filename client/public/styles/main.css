@@ -1,12 +1,20 @@
 /* Reset */
-body, h1, h2, h3, ul, li, a, p {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+body,
+h1,
+h2,
+h3,
+ul,
+li,
+a,
+p {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body, h1, h2, h3, button, option {
-  font-family: 'Nunito', sans-serif;
+nav ul li {
+  display: inline-block;
+  padding: 12px 24px;
 }
 
 /*--------------------------------------------------------------
@@ -20,6 +28,24 @@ footer {
   font-size: 10px;
 }
 
+/*--------------------------------------------------------------
+Colour
+--------------------------------------------------------------*/
+body,
+h1,
+h2,
+h3,
+button,
+option,
+input,
+::placeholder {
+  font-family: "Nunito", sans-serif;
+  color: var(--colour-text);
+}
+
+::placeholder {
+  color: var(--colour-text-light);
+}
 /*--------------------------------------------------------------
 Form Styles
 --------------------------------------------------------------*/
@@ -47,9 +73,9 @@ Colour Swatches
 .colour-group {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-areas: 
-  "name"
-  "swatches";
+  grid-template-areas:
+    "name"
+    "swatches";
   padding-top: 24px;
 }
 
@@ -59,7 +85,7 @@ Colour Swatches
   flex-direction: row;
 }
 
-.colour-group-colour-swatch{
+.colour-group-colour-swatch {
   width: 50px;
   height: 50px;
 }
