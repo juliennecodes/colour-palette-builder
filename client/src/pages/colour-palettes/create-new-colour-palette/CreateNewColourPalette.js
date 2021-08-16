@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { AddSVG } from "../../../components/AddSVG";
 import { Loading } from "../../../components/Loading";
+import { RemoveSVG } from "../../../components/RemoveSVG";
 import "./CreateNewColourPalette.css";
 
 export function CreateNewColourPalette() {
-  const [newColourPalette, setNewColourPalette] = useState({
-    colourGroups: [],
-  });
+  const [newColourPalette, setNewColourPalette] = useState({colourGroups: [],});
   const [colourGroups, setColourGroups] = useState(null);
   let history = useHistory();
+
+  useEffect(() => {
+    fetch(`/colour_groups`)
+      .then((res) => res.json())
+      .then((serverResponse) => setColourGroups(serverResponse.colourGroups));
+  }, []);
 
   const submitForm = (newColourPalette) => {
     fetch(`/colour_palettes`, {
@@ -18,12 +24,6 @@ export function CreateNewColourPalette() {
     }).then((res) => history.push(`/`));
   };
 
-  useEffect(() => {
-    fetch(`/colour_groups`)
-      .then((res) => res.json())
-      .then((serverResponse) => setColourGroups(serverResponse.colourGroups));
-  }, []);
-
   return colourGroups ? (
     <form
       className="new-colour-palette-page"
@@ -32,9 +32,7 @@ export function CreateNewColourPalette() {
         submitForm(newColourPalette);
       }}
     >
-      <h1 className="new-colour-palette-page-heading">
-        New Colour Palette Form
-      </h1>
+      <h1 className="new-colour-palette-page-heading">New Colour Palette Form</h1>
 
       <div className="new-colour-form-name-input-div">
         <label
@@ -67,9 +65,7 @@ export function CreateNewColourPalette() {
                     <div
                       className="colour-group-colour-swatch"
                       key={index}
-                      style={{
-                        backgroundColor: `hsl(${colour.hue}, ${colour.saturation}%, ${colour.lightness}%)`,
-                      }}
+                      style={{backgroundColor: `hsl(${colour.hue}, ${colour.saturation}%, ${colour.lightness}%)`,}}
                     ></div>
                   );
                 })}
@@ -85,7 +81,7 @@ export function CreateNewColourPalette() {
           {colourGroups.map((colourGroup, index) => {
             return (
               <ColourGroupChoice
-              key={index}
+                key={index}
                 colourGroup={colourGroup}
                 newColourPalette={newColourPalette}
                 setNewColourPalette={setNewColourPalette}
@@ -101,30 +97,18 @@ export function CreateNewColourPalette() {
   );
 }
 
-function ColourGroupChoice({
-  colourGroup,
-  newColourPalette,
-  setNewColourPalette,
-}) {
+function ColourGroupChoice({colourGroup, newColourPalette, setNewColourPalette}) {
   const [selected, setSelected] = useState(false);
 
   const addToColourPalette = (colourGroup) => {
     const updatedColourGroups = [...newColourPalette.colourGroups];
     updatedColourGroups.push(colourGroup);
-    setNewColourPalette({
-      ...newColourPalette,
-      colourGroups: updatedColourGroups,
-    });
+    setNewColourPalette({...newColourPalette, colourGroups: updatedColourGroups});
   };
 
   const removeFromColourPalette = (colourGroup) => {
-    const updatedColourGroups = [...newColourPalette.colourGroups].filter(
-      (cg) => cg.name !== colourGroup.name
-    );
-    setNewColourPalette({
-      ...newColourPalette,
-      colourGroups: updatedColourGroups,
-    });
+    const updatedColourGroups = [...newColourPalette.colourGroups].filter((cg) => cg.name !== colourGroup.name);
+    setNewColourPalette({ ...newColourPalette, colourGroups: updatedColourGroups });
   };
 
   const AddButton = () => {
@@ -136,18 +120,7 @@ function ColourGroupChoice({
           addToColourPalette(colourGroup);
         }}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="24"
-          viewBox="0 0 24 24"
-          width="24"
-        >
-          <path d="M0 0h24v24H0V0z" fill="none" />
-          <path
-            fill="hsl(208, 90%, 64%)"
-            d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z"
-          />
-        </svg>
+        <AddSVG />
       </button>
     );
   };
@@ -161,18 +134,7 @@ function ColourGroupChoice({
           removeFromColourPalette(colourGroup);
         }}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="24"
-          viewBox="0 0 24 24"
-          width="24"
-        >
-          <path d="M0 0h24v24H0V0z" fill="none" />
-          <path
-            fill="hsl(208, 90%, 64%)"
-            d="M18 13H6c-.55 0-1-.45-1-1s.45-1 1-1h12c.55 0 1 .45 1 1s-.45 1-1 1z"
-          />
-        </svg>
+        <RemoveSVG />
       </button>
     );
   };
@@ -181,12 +143,9 @@ function ColourGroupChoice({
     <div className="colour-group">
       <div
         className="deselect-overlay"
-        style={
-          selected
-            ? { backgroundColor: "hsla(208, 90%, 73%, .5)" }
-            : { backgroundColor: "hsla(0, 0%, 0%, 0)" }
-        }
+        style={ selected ? { backgroundColor: "hsla(208, 90%, 73%, .5)" } : { backgroundColor: "hsla(0, 0%, 0%, 0)" }}
       ></div>
+      
       <div className="colour-group-colour-swatches">
         {colourGroup.colours.map((colour, index) => {
           return (
