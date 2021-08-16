@@ -15,6 +15,7 @@ header {
 main {
   grid-area: main;
   background-color: hsl(0, 100%, 98%);
+  padding: 24px 36px;
 }
 
 footer {

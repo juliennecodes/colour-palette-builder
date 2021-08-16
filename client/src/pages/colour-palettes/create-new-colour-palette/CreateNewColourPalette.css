@@ -1,0 +1,50 @@
+.new-colour-palette-page {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas:
+    "heading heading"
+    "name colour-choices"
+    "selected-colour-groups colour-choices"
+    "button colour-choice";
+  background-color: hsl(318, 49%, 65%);
+  border-radius: 3px;
+}
+
+.new-colour-palette-page-heading {
+  grid-area: heading;
+}
+
+.new-colour-form-name-input {
+  grid-area: name;
+}
+
+.selected-colour-groups {
+  grid-area: selected-colour-groups;
+}
+
+.colour-group-choices {
+  grid-area: colour-choices;
+  max-height: 70vh;
+  overflow: scroll;
+}
+
+.new-colour-palette-page .colour-group {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "colour-group button";
+}
+
+.new-colour-palette-page .colour-group-colour-swatches {
+  grid-area: colour-group;
+}
+
+.new-colour-palette-page .select-colour-group-button {
+  grid-area: button;
+}
+
+.deselect-overlay {
+  grid-area: colour-group;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}

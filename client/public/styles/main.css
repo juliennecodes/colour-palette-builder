@@ -5,7 +5,7 @@ body, h1, h2, h3, ul, li, a, p {
     box-sizing: border-box;
 }
 
-body, button, option {
+body, h1, h2, h3, button, option {
   font-family: 'Nunito', sans-serif;
 }
 

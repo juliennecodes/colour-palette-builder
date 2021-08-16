@@ -1,21 +1,14 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Loading } from "../../../components/Loading";
 import "./CreateNewColourPalette.css";
 
 export function CreateNewColourPalette() {
   const [newColourPalette, setNewColourPalette] = useState({
-    name: null,
     colourGroups: [],
   });
-  let history = useHistory();
-
   const [colourGroups, setColourGroups] = useState(null);
-
-  useEffect(() => {
-    fetch(`/colour_groups`)
-      .then((res) => res.json())
-      .then((serverResponse) => setColourGroups(serverResponse.colourGroups));
-  }, []);
+  let history = useHistory();
 
   const submitForm = (newColourPalette) => {
     fetch(`/colour_palettes`, {
@@ -25,9 +18,19 @@ export function CreateNewColourPalette() {
     }).then((res) => history.push(`/`));
   };
 
-  const NewColourPaletteForm = () => {
-    return (
+  useEffect(() => {
+    fetch(`/colour_groups`)
+      .then((res) => res.json())
+      .then((serverResponse) => setColourGroups(serverResponse.colourGroups));
+  }, []);
+
+  return colourGroups ? (
+    <div className="new-colour-palette-page">
+      <h1 className="new-colour-palette-page-heading">
+        New Colour Palette Form
+      </h1>
       <form
+        className="new-colour-form-name-input"
         onSubmit={(e) => {
           e.preventDefault();
           submitForm(newColourPalette);
@@ -42,11 +45,7 @@ export function CreateNewColourPalette() {
         ></input>
         <button>Create new colour palette</button>
       </form>
-    );
-  };
 
-  const SelectedColourGroups = () => {
-    return (
       <div className="selected-colour-groups">
         <h2>Selected Colour Groups </h2>
         {newColourPalette.colourGroups.map((colourGroup, index) => {
@@ -69,11 +68,7 @@ export function CreateNewColourPalette() {
           );
         })}
       </div>
-    );
-  };
 
-  const ColourGroupChoices = () => {
-    return (
       <div className="colour-group-choices">
         <h2>Colour Group Choices </h2>
         {colourGroups.map((colourGroup, index) => {
@@ -87,20 +82,12 @@ export function CreateNewColourPalette() {
           );
         })}
       </div>
-    );
-  };
-  
-  return (
-    <div className="new-colour-palette-page">
-      <h1>New Colour Palette Form</h1>
-      <NewColourPaletteForm />
-      <SelectedColourGroups />
-      {colourGroups && <ColourGroupChoices />}
     </div>
+  ) : (
+    <Loading />
   );
 }
-// ----------------------------------------------------------------------------------------------------
-// ----------------------------------------------------------------------------------------------------
+
 function ColourGroupChoice({
   colourGroup,
   index,
@@ -131,12 +118,21 @@ function ColourGroupChoice({
   const AddButton = () => {
     return (
       <button
+        className="select-colour-group-button"
         onClick={() => {
           setSelected(true);
           addToColourPalette(colourGroup);
         }}
       >
-        Add To Colour Palette
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+        >
+          <path d="M0 0h24v24H0V0z" fill="none" />
+          <path d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z" />
+        </svg>
       </button>
     );
   };
@@ -144,19 +140,35 @@ function ColourGroupChoice({
   const RemoveButton = () => {
     return (
       <button
+        className="select-colour-group-button"
         onClick={() => {
           setSelected(false);
           removeFromColourPalette(colourGroup);
         }}
       >
-        Remove From Colour Palette
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+        >
+          <path d="M0 0h24v24H0V0z" fill="none" />
+          <path d="M18 13H6c-.55 0-1-.45-1-1s.45-1 1-1h12c.55 0 1 .45 1 1s-.45 1-1 1z" />
+        </svg>
       </button>
     );
   };
 
   return (
     <div className="colour-group" key={index}>
-      <p>{colourGroup.name}</p>
+      <div
+        className="deselect-overlay"
+        style={
+          selected
+            ? { backgroundColor: "hsla(0, 0%, 0%, .3)" }
+            : { backgroundColor: "hsla(0, 0%, 0%, 0)" }
+        }
+      ></div>
       <div className="colour-group-colour-swatches">
         {colourGroup.colours.map((colour, index) => {
           return (
