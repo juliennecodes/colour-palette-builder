@@ -5,7 +5,7 @@ import { RemoveSVG } from "../../../components/RemoveSVG";
 import "./CreateNewColourPalette.css";
 
 export function CreateNewColourPalette() {
-  const [newColourPalette, setNewColourPalette] = useState({colourGroups: [],});
+  const [newColourPalette, setNewColourPalette] = useState({name: null, colourGroups: [],});
   const [colourGroups, setColourGroups] = useState(null);
   let history = useHistory();
 
@@ -39,7 +39,9 @@ export function CreateNewColourPalette() {
     </form>
   );
 }
+// ----------------------------------------------------------------------------------------------------
 
+// ----------------------------------------------------------------------------------------------------
 function NameInputField({newColourPalette, setNewColourPalette}){
   return(
     <div className="new-colour-form-name-input-div">
@@ -171,7 +173,7 @@ function ColourGroupChoice({colourGroup, newColourPalette, setNewColourPalette})
           );
         })}
       </div>
-      
+
       {selected ? <RemoveButton /> : <AddButton />}
     </div>
   );
