@@ -164,10 +164,7 @@ Button
   box-sizing: border-box;
   margin: 24px 24px 0px;
   cursor: pointer;
-  background-color: var(--colour-pl3);
-  color: var(--colour-pd3);
   font-size: 16px;
-
   background-color: var(--colour-pd3);
   color: var(--colour-pl2);
   justify-self: flex-end;

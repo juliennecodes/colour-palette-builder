@@ -1,9 +1,220 @@
+.new-colour-group-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 36px auto auto 64px;
+  grid-template-areas:
+    "heading"
+    "name"
+    "new-colour-group"
+    "button";
+
+  background-color: var(--colour-pl1);
+  border-radius: 24px;
+  padding: 24px;
+  gap: 18px 36px;
+  box-shadow: 0 5px 15px hsl(355deg 50% 20% / 20%);
+}
+
+/*--------------------------------------------------------------
+Heading
+--------------------------------------------------------------*/
+.new-colour-group-form-heading {
+  grid-area: heading;
+  justify-self: flex-start;
+  align-self: flex-end;
+  font-size: 16px;
+  padding-left: 24px;
+}
+
+/*--------------------------------------------------------------
+Name Input
+--------------------------------------------------------------*/
+.new-colour-group-form-name-input-div {
+  grid-area: name;
+  display: grid;
+  grid-template-areas:
+    "label"
+    "input"
+    "span";
+  border-radius: 24px;
+  padding: 12px 24px;
+  gap: 8px;
+}
+
+.new-colour-group-form-name-input-label {
+  grid-area: label;
+  font-size: 12px;
+}
+.new-colour-group-form-name-input {
+  grid-area: input;
+  border: none;
+  background-color: transparent;
+  font-size: 48px;
+  border-radius: 24px;
+}
+
+.new-colour-group-form-name-input-span {
+  grid-area: span;
+  content: "";
+  height: 8px;
+  border-radius: 4px;
+  background-color: var(--colour-pd3);
+}
+
+/*--------------------------------------------------------------
+New Colour Group
+--------------------------------------------------------------*/
 .new-colour-group {
-    /* border: 2px solid black; */
-    min-height: 100px;
+  grid-area: new-colour-group;
+  background-color: var(--colour-pl1);
+  border-radius: 24px;
+  padding: 24px 36px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 16px 1fr;
+  grid-template-areas:
+    "heading input"
+    "swatches input";
+  gap: 24px;
+}
+
+.new-colour-group-heading {
+  font-size: 12px;
+}
+
+.new-colour-group .colour-group-colour-swatches {
+  grid-area: swatches;
+  justify-self: center;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 48px;
+}
+
+.new-colour-group .colour-group-colour-swatch {
+  width: 96px;
+  height: 96px;
+  border-radius: 48px;
+}
+
+/*--------------------------------------------------------------
+New Colour Input
+--------------------------------------------------------------*/
+.new-colour-input-div {
+  grid-area: input;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "heading"
+    "preview"
+    "inputs"
+    "button";
+  gap: 24px;
+  border-radius: 24px;
+  border: 2px solid var(--colour-pl3);
+  padding: 24px 36px;
+}
+
+.new-colour-input-heading {
+  grid-area: heading;
+  font-size: 12px;
+}
+
+.new-colour-preview-div {
+  grid-area: preview;
+  display: grid;
+  grid-template-areas: "colour";
+  padding: 16px 0px;
 }
 
 .new-colour-preview {
-    width: 100%;
-    height: 100px;
+  grid-area: colour;
+  align-self: flex-end;
+  width: 96px;
+  height: 96px;
+  justify-self: center;
+  border-radius: 48px;
+}
+
+/*--------------------------------------------------------------
+New Colour Input Labels and Inputs
+--------------------------------------------------------------*/
+.labels-and-inputs {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-self: center;
+}
+
+.label-and-input {
+  display: grid;
+  grid-template-areas:
+    "input"
+    "span"
+    "label";
+  justify-self: flex-start;
+}
+
+.new-colour-input-input {
+  grid-area: input;
+  align-self: flex-end;
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+  border-radius: 24px;
+  width: 48px;
+  height: 36px;
+  text-align: center;
+  margin-left: 12px;
+}
+
+.new-colour-input-span {
+  grid-area: span;
+  justify-self: center;
+  align-self: flex-end;
+  width: 48px;
+  content: "";
+  height: 2px;
+  border-radius: 2px;
+  background-color: var(--colour-pd3);
+}
+
+.new-colour-input-label {
+  grid-area: label;
+  align-self: flex-end;
+  font-size: 12px;
+  text-align: center;
+}
+
+/*--------------------------------------------------------------
+New Colour Input Button
+--------------------------------------------------------------*/
+.add-new-colour-button {
+  grid-area: button;
+  border: none;
+  background-color: var(--colour-pd1);
+  background-color: var(--colour-pl3);
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 3px;
+}
+
+/*--------------------------------------------------------------
+Button
+--------------------------------------------------------------*/
+.submit-form-button {
+  grid-area: button;
+  align-self: flex-end;
+  width: 240px;
+  border: none;
+  border-radius: 24px;
+  padding: 12px 24px;
+  box-sizing: border-box;
+  margin-right: 36px;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: var(--colour-pd3);
+  color: var(--colour-pl2);
+  justify-self: flex-end;
 }
